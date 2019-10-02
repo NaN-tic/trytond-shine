@@ -80,10 +80,13 @@ class Table(model.ModelSQL, model.ModelView):
 
         if missing or different_types:
             message = ['- %s' % x for x in (missing + different_types)]
-            raise UserWarning(
-                'shine_copy_from_warning.%s.%s' % (self.name, from_table.id),
-                gettext('shine.copy_from_warning', fields='\n'.join(message),
-                    from_table=from_table.rec_name, table=self.rec_name))
+
+            key = 'task_shine_copy_from_warning.%d' % self.id
+            if Warning.check(key):
+                raise UserWarning(
+                    'shine_copy_from_warning.%s.%s' % (self.name, from_table.id),
+                    gettext('shine.copy_from_warning', fields='\n'.join(message),
+                        from_table=from_table.rec_name, table=self.rec_name))
 
         if not existing:
             return
