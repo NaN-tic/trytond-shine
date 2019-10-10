@@ -147,8 +147,9 @@ class Sheet(TaggedMixin, Workflow, ModelSQL, ModelView):
     dataset = fields.Many2One('shine.dataset', 'Data Set', states={
             'readonly': Eval('state') != 'draft',
             }, depends=['state'])
-    timeout = fields.Integer('Timeout (s)', required=True, states={
+    timeout = fields.Integer('Timeout (s)', states={
             'invisible': ~Bool(Eval('dataset')),
+            'required': Bool(Eval('dataset')),
             }, help='Maximum amount of time allowed for computing sheet data.')
     views = fields.One2Many('shine.view', 'sheet', 'Views')
     tags = fields.Many2Many('shine.sheet.tag', 'sheet', 'tag', 'Tags', domain=[
