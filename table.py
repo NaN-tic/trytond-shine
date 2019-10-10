@@ -59,6 +59,8 @@ class Table(model.ModelSQL, model.ModelView):
             self.name + '_id_seq')
 
     def copy_from(self, from_table):
+        Warning = Pool().get('res.user.warning')
+
         fields = {x.name for x in self.fields}
         from_fields = {x.name for x in from_table.fields}
         missing = sorted(list(from_fields - fields))
@@ -80,13 +82,11 @@ class Table(model.ModelSQL, model.ModelView):
 
         if missing or different_types:
             message = ['- %s' % x for x in (missing + different_types)]
-
-            key = 'task_shine_copy_from_warning.%d' % self.id
+            key = 'shine_copy_from_warning.%s.%s' % (self.name, from_table.id),
             if Warning.check(key):
-                raise UserWarning(
-                    'shine_copy_from_warning.%s.%s' % (self.name, from_table.id),
-                    gettext('shine.copy_from_warning', fields='\n'.join(message),
-                        from_table=from_table.rec_name, table=self.rec_name))
+                raise UserWarning(key, gettext('shine.copy_from_warning',
+                    fields='\n'.join(message), from_table=from_table.rec_name,
+                    table=self.rec_name))
 
         if not existing:
             return
