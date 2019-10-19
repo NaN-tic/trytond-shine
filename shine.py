@@ -969,7 +969,7 @@ class View(ModelSQL, ModelView):
             }, depends=['type'])
 
     @staticmethod
-    def default_editable():
+    def default_table_editable():
         return 'disabled'
 
     @staticmethod
