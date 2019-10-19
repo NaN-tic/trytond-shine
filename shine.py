@@ -558,10 +558,10 @@ class DataSet(ModelSQL, ModelView):
             ('type', '=', Eval('type')),
             ], states={
             'invisible': Eval('source') != 'sheet',
-            })
+            }, depends=['type', 'source'])
     query = fields.Text('SQL Query', states={
             'invisible': Eval('source') != 'sql',
-            })
+            }, depends=['source'])
 
     @staticmethod
     def default_type():
@@ -940,14 +940,14 @@ class View(ModelSQL, ModelView):
             ], states={
             'required': Eval('type') == 'chart',
             'invisible': Eval('type') != 'chart',
-            })
+            }, depends=['type', 'sheet'])
     chart_value = fields.Many2One('shine.formula', 'Value', domain=[
             ('sheet', '=', Eval('sheet')),
             ('type', 'in', ['integer', 'float', 'numeric']),
             ], states={
             'required': Eval('type') == 'chart',
             'invisible': Eval('type') != 'chart',
-            })
+            }, depends=['type', 'sheet'])
     custom_type = fields.Selection([
             (None, ''),
             ('tree', 'Tree'),
