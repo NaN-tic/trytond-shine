@@ -1,5 +1,5 @@
 <tryton>
-    <data group="1">
+    <data grouped="1">
         <record model="ir.message" id="consecutive_icons">
             <field name="text">There cannot be two consecutive fields of Icon type in sheet "%(sheet)s".</field>
         </record>
