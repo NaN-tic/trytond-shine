@@ -99,7 +99,7 @@ class DashboardElement(sequence_ordered(), ModelSQL, ModelView):
     def delete(cls, elements):
         super(DashboardElement, cls).delete(elements)
         cls.delete_actions(elements)
-        
+
     @classmethod
     def create_actions(cls, elements):
         ActWindow = Pool().get('ir.action.act_window')
