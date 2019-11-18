@@ -232,7 +232,7 @@
         <record model="ir.ui.view" id="view_view_table_formula_form">
             <field name="model">shine.view.table.formula</field>
             <field name="type">form</field>
-            <field name="name">view_form</field>
+            <field name="name">view_table_formula_form</field>
         </record>
 
         <record model="ir.action.act_window" id="act_view_from_sheet">
