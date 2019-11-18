@@ -8,7 +8,6 @@ from . import shine
 from . import table
 from . import data
 from . import tag
-from . import dashboard
 from . import function
 
 def register():
@@ -28,7 +27,4 @@ def register():
         data.Data,
         tag.Tag,
         tag.SheetTag,
-        dashboard.Dashboard,
-        dashboard.DashboardElement,
-        dashboard.DashboardMockup,
         module='shine', type_='model')
